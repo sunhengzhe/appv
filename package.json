@@ -1,6 +1,6 @@
 {
   "name": "appv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "app 版本相关工具库",
   "main": "index.js",
   "scripts": {
