@@ -152,3 +152,26 @@ describe('appv.isBetween', () => {
     expect(appv.isBetween('1.21.21', ['2.1'])).toBe(false);
   });
 });
+
+describe('appv.compute', () => {
+  test('patch, minor and major should be methods', () => {
+    expect(appv.major).toBeInstanceOf(Function);
+    expect(appv.minor).toBeInstanceOf(Function);
+    expect(appv.patch).toBeInstanceOf(Function);
+  });
+
+  test('appv.patch should works well', () => {
+    expect(appv.patch('0.0.1')).toBe('0.0.2');
+    expect(appv.patch('1.2.3')).toBe('1.2.4');
+  });
+
+  test('appv.minor should works well', () => {
+    expect(appv.minor('0.0.1')).toBe('0.1.0');
+    expect(appv.minor('1.2.3')).toBe('1.3.0');
+  });
+
+  test('appv.major should works well', () => {
+    expect(appv.major('0.0.1')).toBe('1.0.0');
+    expect(appv.major('1.2.3')).toBe('2.0.0');
+  });
+});

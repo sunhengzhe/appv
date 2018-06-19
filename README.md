@@ -44,6 +44,20 @@ appv.isLt('1.21.21', '2.1') // true
 appv.isBetween('1.2.3', ['1', '2']) // true
 ```
 
+### compute
+
+操作版本，提供 `patch`、`minor`、`major` 方法。
+
+#### Example
+
+参考 [appv.test.js](./test/appv.test.js)
+
+```js
+appv.patch('0.0.1') // 0.0.2
+appv.minor('0.0.1') // 0.1.0
+appv.major('0.0.1') // 1.0.0
+```
+
 ## test
 
 ```js

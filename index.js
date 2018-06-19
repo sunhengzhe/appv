@@ -74,8 +74,8 @@ class AppVersion {
 
   /**
    * 返回 version 是否在闭合 range 之间。
-   * @param {String} 版本
-   * @param {Array} 版本区间
+   * @param {String} version 版本
+   * @param {Array} range 版本区间
    */
   isBetween(version, range = []) {
     if (range.length === 1) {
@@ -87,6 +87,36 @@ class AppVersion {
     }
 
     return false;
+  }
+
+  /**
+   * 添加 patch
+   * @param {String} version 版本号
+   */
+  patch(version) {
+    const { major, minor, patch } = this.parseVersion(version);
+
+    return `${major}.${minor}.${parseInt(patch, 10) + 1}`;
+  }
+
+  /**
+   * 添加 minor
+   * @param {String} version 版本号
+   */
+  minor(version) {
+    const { major, minor } = this.parseVersion(version);
+
+    return `${major}.${parseInt(minor, 10) + 1}.0`;
+  }
+
+  /**
+   * 添加 major
+   * @param {String} version 版本号
+   */
+  major(version) {
+    const { major } = this.parseVersion(version);
+
+    return `${parseInt(major, 10) + 1}.0.0`;
   }
 }
 
