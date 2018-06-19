@@ -4,6 +4,20 @@
 
 操作 app 版本的方法库
 
+## Install
+
+```
+npm i appv # or yarn install
+```
+
+## Usage
+
+```js
+const appv = require('appv');
+
+appv.parseVersion('1.2.3') // { major: 1, minor: 2, patch: 3 }
+```
+
 ## Feature
 
 ### parseVersion
