@@ -1,4 +1,7 @@
 # appv
+
+[![Build Status](https://travis-ci.org/sunhengzhe/appv.svg?branch=master)](https://travis-ci.org/sunhengzhe/appv)
+
 操作 app 版本的方法库
 
 ## Feature
