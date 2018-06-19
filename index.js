@@ -71,6 +71,23 @@ class AppVersion {
 
     return false;
   }
+
+  /**
+   * 返回 version 是否在闭合 range 之间。
+   * @param {String} 版本
+   * @param {Array} 版本区间
+   */
+  isBetween(version, range = []) {
+    if (range.length === 1) {
+      return this.isGte(range[0]);
+    }
+
+    if (range.length === 2) {
+      return this.isGte(version, range[0]) && this.isLte(version, range[1]);
+    }
+
+    return false;
+  }
 }
 
 AppVersion.prototype.parseVersion = parseVersion;

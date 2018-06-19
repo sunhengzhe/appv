@@ -136,3 +136,19 @@ describe('appv.compare', () => {
     });
   });
 });
+
+describe('appv.isBetween', () => {
+  test('appv.isBetween should be a method', () => {
+    expect(appv.isBetween).toBeInstanceOf(Function);
+  });
+
+  test('appv.isBetween should works well', () => {
+    expect(appv.isBetween('1.2.3', ['1', '2'])).toBe(true);
+    expect(appv.isBetween('1.2.13', ['1.2.13', '1.2.14'])).toBe(true);
+    expect(appv.isBetween('1.21.21', ['1', '1.21.21'])).toBe(true);
+
+    expect(appv.isBetween('1.2.3', [])).toBe(false);
+    expect(appv.isBetween('1.2.13', ['1.11.3', '1.11.4'])).toBe(false);
+    expect(appv.isBetween('1.21.21', ['2.1'])).toBe(false);
+  });
+});

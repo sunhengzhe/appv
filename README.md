@@ -32,6 +32,18 @@ appv.isGte('1', '0.11.12') // true
 appv.isLt('1.21.21', '2.1') // true
 ```
 
+### range
+
+判断版本是否在一个区间，提供 `isBetween` 方法。
+
+#### Example
+
+参考 [appv.test.js](./test/appv.test.js)
+
+```js
+appv.isBetween('1.2.3', ['1', '2']) // true
+```
+
 ## test
 
 ```js
