@@ -8,9 +8,30 @@ describe('appv', () => {
   });
 });
 
+describe('appv.isValidVersion', () => {
+  test('appv.isValidVersion should be methods', () => {
+    expect(appv.isValidVersion).toBeInstanceOf(Function);
+  });
+
+  test('appv.isValidVersion should works well', () => {
+    expect(appv.isValidVersion(1)).toBe(false);
+    expect(appv.isValidVersion(true)).toBe(false);
+    expect(appv.isValidVersion()).toBe(false);
+    expect(appv.isValidVersion('abc')).toBe(false);
+
+    expect(appv.isValidVersion('1')).toBe(true);
+    expect(appv.isValidVersion('1.2')).toBe(true);
+    expect(appv.isValidVersion('1.2.3')).toBe(true);
+  });
+});
+
 describe('appv.parseVersion', () => {
   test('parseVersion should be a method', () => {
     expect(appv.parseVersion).toBeInstanceOf(Function);
+  });
+
+  test('parseVersion should throw an error when param is not valid', () => {
+    expect(() => appv.parseVersion('abc')).toThrowError(Error);
   });
 
   test('parseVersion should parse x.x.x correct', () => {

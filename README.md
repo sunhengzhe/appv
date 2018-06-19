@@ -18,6 +18,17 @@ appv.parseVersion('1.2') // { major: 1, minor: 2, patch: 0 }
 appv.parseVersion('1') // { major: 1, minor: 0, patch: 0 }
 ```
 
+### valid
+
+判断是否是合法版本号（x.x.x），提供 `isValidVersion` 方法。
+
+#### Example
+
+```js
+appv.isValidVersion('1.2.3') // true
+appv.isValidVersion('abc') // false
+```
+
 ### compare
 
 比较两个版本号，提供 `isEq`、`isGt`、`isGte`、`isLt`、`isLte` 等方法。

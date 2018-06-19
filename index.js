@@ -7,11 +7,27 @@ const COMPARE_TYPE = {
 };
 
 /**
+ * 是否是合法的版本号
+ * @param {String} version 版本
+ */
+const isValidVersion = (version) => {
+  if (typeof version !== 'string') {
+    return false;
+  }
+
+  return /\d+(\.\d+)?(\.\d+)?/.test(version);
+};
+
+/**
  * 格式化版本号，如 ‘1.1.1’
  * @param {*} str 版本号
  */
-const parseVersion = (str = '') => {
-  const verArr = (str.split('.') || []).slice(0, 3);
+const parseVersion = (str) => {
+  if (!isValidVersion(str)) {
+    throw new Error(`${str} is not a valid version`);
+  }
+
+  const verArr = str.split('.').slice(0, 3);
 
   const [major = 0, minor = 0, patch = 0] = verArr.map(item => parseInt(item, 10));
 
@@ -37,6 +53,14 @@ class AppVersion {
    * @param {*} b 对比版本
    */
   compare(type, a, b) {
+    if (!isValidVersion(a)) {
+      throw new Error(`${a} is not a valid version`);
+    }
+
+    if (!isValidVersion(b)) {
+      throw new Error(`${b} is not a valid version`);
+    }
+
     const aVer = this.parseVersion(a);
     const bVer = this.parseVersion(b);
 
@@ -78,8 +102,12 @@ class AppVersion {
    * @param {Array} range 版本区间
    */
   isBetween(version, range = []) {
+    if (!isValidVersion(version)) {
+      throw new Error(`${version} is not a valid version`);
+    }
+
     if (range.length === 1) {
-      return this.isGte(range[0]);
+      return this.isGte(version, range[0]);
     }
 
     if (range.length === 2) {
@@ -94,6 +122,10 @@ class AppVersion {
    * @param {String} version 版本号
    */
   patch(version) {
+    if (!isValidVersion(version)) {
+      throw new Error(`${version} is not a valid version`);
+    }
+
     const { major, minor, patch } = this.parseVersion(version);
 
     return `${major}.${minor}.${parseInt(patch, 10) + 1}`;
@@ -104,6 +136,10 @@ class AppVersion {
    * @param {String} version 版本号
    */
   minor(version) {
+    if (!isValidVersion(version)) {
+      throw new Error(`${version} is not a valid version`);
+    }
+
     const { major, minor } = this.parseVersion(version);
 
     return `${major}.${parseInt(minor, 10) + 1}.0`;
@@ -114,6 +150,10 @@ class AppVersion {
    * @param {String} version 版本号
    */
   major(version) {
+    if (!isValidVersion(version)) {
+      throw new Error(`${version} is not a valid version`);
+    }
+
     const { major } = this.parseVersion(version);
 
     return `${parseInt(major, 10) + 1}.0.0`;
@@ -121,5 +161,6 @@ class AppVersion {
 }
 
 AppVersion.prototype.parseVersion = parseVersion;
+AppVersion.prototype.isValidVersion = isValidVersion;
 
 module.exports = new AppVersion();
